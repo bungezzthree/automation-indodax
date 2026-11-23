@@ -1,0 +1,5 @@
+*** Test Cases ***;${endpoint};${pair_id};[Tags]
+Ticker With Unknown Pair;ticker;zzzidr;P2
+Ticker With Uppercase Pair;ticker;BTC-IDR;P3
+Order Book With Unknown Pair;depth;zzzidr;P2
+Trades With Unknown Pair;trades;zzzidr;P2

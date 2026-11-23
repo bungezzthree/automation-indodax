@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GET /api/depth/{pair_id}",
+  "type": "object",
+  "required": ["buy", "sell"],
+  "properties": {
+    "buy":  {"$ref": "#/$defs/side"},
+    "sell": {"$ref": "#/$defs/side"}
+  },
+  "$defs": {
+    "numericString": {"type": "string", "pattern": "^[0-9]+([.][0-9]+)?$"},
+    "side": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [{"$ref": "#/$defs/numericString"}, {"$ref": "#/$defs/numericString"}],
+        "minItems": 2, "maxItems": 2
+      }
+    }
+  }
+}

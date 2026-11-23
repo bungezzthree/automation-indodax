@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GET /api/summaries",
+  "type": "object",
+  "required": ["tickers", "prices_24h", "prices_7d"],
+  "properties": {
+    "tickers": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["buy", "sell", "last", "high", "low", "name", "server_time"]
+      }
+    },
+    "prices_24h": {"type": "object"},
+    "prices_7d": {"type": "object"}
+  }
+}

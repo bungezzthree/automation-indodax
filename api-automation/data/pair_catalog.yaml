@@ -1,0 +1,20 @@
+# Expected static attributes of key markets (contract-level reference data).
+# Used by tests/public/02_pairs.robot. Only stable attributes belong here.
+btcidr:
+  symbol: BTCIDR
+  base_currency: idr
+  traded_currency: btc
+  ticker_id: btc_idr
+  description: BTC/IDR
+usdtidr:
+  symbol: USDTIDR
+  base_currency: idr
+  traded_currency: usdt
+  ticker_id: usdt_idr
+  description: USDT/IDR
+ethidr:
+  symbol: ETHIDR
+  base_currency: idr
+  traded_currency: eth
+  ticker_id: eth_idr
+  description: ETH/IDR

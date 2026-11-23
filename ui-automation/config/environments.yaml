@@ -1,0 +1,25 @@
+# Environment matrix for UI suites (web + mobile). No secrets in this file.
+# Every key can be overridden with an env var of the same name in UPPER_CASE.
+default_env: prod
+
+common:
+  browser: chromium            # chromium | firefox | webkit
+  headless: true
+  browser_timeout: 20s         # Playwright auto-wait timeout per action
+  viewport_width: 1440
+  viewport_height: 900
+  locale: id-ID
+  tracing: false               # true -> Playwright trace.zip per test (open with `npx playwright show-trace`)
+  appium_server_url: http://127.0.0.1:4723
+  mobile_timeout: 20s
+
+environments:
+  dev:
+    web_base_url: http://localhost:3000
+    read_only: false
+  staging:
+    web_base_url: https://staging.indodax.example   # placeholder - replace with real staging host
+    read_only: false
+  prod:
+    web_base_url: https://indodax.com
+    read_only: true            # runner auto-excludes `no-prod` tests

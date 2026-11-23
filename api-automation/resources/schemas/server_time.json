@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GET /api/server_time",
+  "type": "object",
+  "required": ["timezone", "server_time"],
+  "properties": {
+    "timezone": {"type": "string", "minLength": 1},
+    "server_time": {"type": "integer", "minimum": 0}
+  }
+}

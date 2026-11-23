@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private API (TAPI) error envelope",
+  "type": "object",
+  "required": ["success", "error", "error_code"],
+  "properties": {
+    "success": {"const": 0},
+    "error": {"type": "string", "minLength": 1},
+    "error_code": {"type": "string", "minLength": 1}
+  }
+}

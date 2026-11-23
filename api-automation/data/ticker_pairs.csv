@@ -1,0 +1,6 @@
+*** Test Cases ***;${pair_id};${volume_field};[Tags];[Documentation]
+Ticker BTC/IDR;btcidr;vol_btc;smoke,P1;Most liquid IDR market
+Ticker USDT/IDR;usdtidr;vol_usdt;smoke,P1;Stablecoin pair - same pair used by the Web UI suite
+Ticker ETH/IDR;ethidr;vol_eth;P2;
+Ticker SOL/IDR;solidr;vol_sol;P2;
+Ticker DOGE/IDR;dogeidr;vol_doge;P3;Low unit-price asset (checks small-number handling)

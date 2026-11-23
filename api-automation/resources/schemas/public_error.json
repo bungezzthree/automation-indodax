@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public API error envelope",
+  "type": "object",
+  "required": ["error", "error_description"],
+  "properties": {
+    "error": {"type": "string", "minLength": 1},
+    "error_description": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,0 +1,5 @@
+robotframework>=7.1
+robotframework-datadriver>=1.11
+requests>=2.32
+jsonschema>=4.23
+PyYAML>=6.0.2

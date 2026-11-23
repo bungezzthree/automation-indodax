@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GET /api/pairs",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": ["id", "symbol", "base_currency", "traded_currency", "description", "ticker_id",
+                 "trade_min_base_currency", "trade_min_traded_currency", "trade_fee_percent",
+                 "is_maintenance", "is_market_suspended", "price_round", "volume_precision"],
+    "properties": {
+      "id": {"type": "string", "pattern": "^[a-z0-9]+$"},
+      "symbol": {"type": "string", "pattern": "^[A-Z0-9]+$"},
+      "base_currency": {"type": "string", "enum": ["idr", "usdt", "btc"]},
+      "traded_currency": {"type": "string", "minLength": 1},
+      "traded_currency_unit": {"type": "string"},
+      "description": {"type": "string", "pattern": "^.+/.+$"},
+      "ticker_id": {"type": "string", "pattern": "^[a-z0-9]+_[a-z0-9]+$"},
+      "url_logo": {"type": "string"},
+      "url_logo_png": {"type": "string"},
+      "trade_min_base_currency": {"type": "number", "minimum": 0},
+      "trade_min_traded_currency": {"type": "number", "minimum": 0},
+      "trade_fee_percent": {"type": "number", "minimum": 0, "maximum": 100},
+      "trade_fee_percent_taker": {"type": "number", "minimum": 0, "maximum": 100},
+      "trade_fee_percent_maker": {"type": "number", "minimum": 0, "maximum": 100},
+      "is_maintenance": {"type": "integer", "enum": [0, 1]},
+      "is_market_suspended": {"type": "integer", "enum": [0, 1]},
+      "price_round": {"type": "integer", "minimum": 0},
+      "volume_precision": {"type": "integer", "minimum": 0},
+      "has_memo": {"type": "boolean"},
+      "disable_deposit": {"type": "boolean"}
+    }
+  }
+}

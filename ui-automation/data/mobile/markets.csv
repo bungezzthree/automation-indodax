@@ -1,0 +1,3 @@
+*** Test Cases ***;${pair_name};${search_keyword};[Tags]
+Mobile market USDT/IDR;USDT/IDR;USDT;smoke,P1
+Mobile market BTC/IDR;BTC/IDR;BTC;P2

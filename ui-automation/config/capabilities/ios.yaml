@@ -1,0 +1,14 @@
+# Appium 2 / W3C capabilities for the Indodax iOS app.
+# ${VAR} placeholders are expanded from environment variables at runtime.
+platformName: iOS
+appium:automationName: XCUITest
+appium:deviceName: ${IOS_DEVICE_NAME}              # e.g. iPhone 15
+appium:udid: ${IOS_UDID}
+appium:platformVersion: ${IOS_PLATFORM_VERSION}    # e.g. 17.5
+appium:app: ${IOS_APP_PATH}                        # .app (simulator) / .ipa (real device)
+appium:bundleId: ${IOS_BUNDLE_ID}                  # set to Indodax bundle id for installed-app runs
+appium:noReset: true
+appium:autoAcceptAlerts: true
+appium:newCommandTimeout: 120
+appium:language: id
+appium:locale: id_ID

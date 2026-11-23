@@ -1,0 +1,4 @@
+*** Test Cases ***;${pair_slug};${expected_header};${expected_title};[Tags];[Documentation]
+Market overview USDTIDR;USDTIDR;USDT to IDR;USDT to IDR;smoke,P1;Primary market under test (assessment scope)
+Market overview BTCIDR;BTCIDR;BTC to IDR;BTC to IDR;P2;
+Market overview ETHIDR;ETHIDR;ETH to IDR;ETH to IDR;P2;

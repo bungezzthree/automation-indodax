@@ -1,0 +1,30 @@
+# Environment matrix for the API suite.
+# Secrets (API key/secret) are NEVER stored here - they come from environment variables.
+# Any value can be overridden at runtime with an env var of the same name in UPPER_CASE
+# (e.g. API_BASE_URL=https://my-mock:8080 python run.py --env dev).
+default_env: prod
+
+environments:
+  dev:
+    api_base_url: http://localhost:8080        # local mock / WireMock of Indodax public API
+    tapi_url: http://localhost:8080/tapi
+    timeout_s: 5
+    max_retries: 0
+    response_time_sla_ms: 2000
+    read_only: false
+
+  staging:
+    api_base_url: https://staging.indodax.example   # placeholder - replace with real staging host
+    tapi_url: https://staging.indodax.example/tapi
+    timeout_s: 10
+    max_retries: 1
+    response_time_sla_ms: 3000
+    read_only: false
+
+  prod:
+    api_base_url: https://indodax.com
+    tapi_url: https://indodax.com/tapi
+    timeout_s: 10
+    max_retries: 2
+    response_time_sla_ms: 3000
+    read_only: true          # runner auto-excludes tests tagged `no-prod`

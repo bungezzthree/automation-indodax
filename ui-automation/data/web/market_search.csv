@@ -1,0 +1,5 @@
+*** Test Cases ***;${keyword};${pair_id};[Tags]
+Search 'ETH' finds ethidr;ETH;ethidr;smoke,P1
+Search 'btc' (lowercase) finds btcidr;btc;btcidr;P2
+Search 'Ethereum' (asset name) finds ethidr;Ethereum;ethidr;P2
+Search 'usdt' finds usdtidr;usdt;usdtidr;P2

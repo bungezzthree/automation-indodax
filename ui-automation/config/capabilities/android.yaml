@@ -1,0 +1,16 @@
+# Appium 2 / W3C capabilities for the Indodax Android app.
+# ${VAR} placeholders are expanded from environment variables at runtime; unresolved
+# placeholders are dropped so Appium falls back to its defaults.
+platformName: Android
+appium:automationName: UiAutomator2
+appium:deviceName: ${ANDROID_DEVICE_NAME}          # e.g. emulator-5554 / Pixel_7_API_34
+appium:udid: ${ANDROID_UDID}
+appium:platformVersion: ${ANDROID_PLATFORM_VERSION}
+appium:app: ${ANDROID_APP_PATH}                    # optional: path/URL to .apk (CI). Omit to use installed app
+appium:appPackage: id.co.bitcoin                   # Indodax package id (Play Store)
+appium:appWaitActivity: "*"
+appium:noReset: true                               # keep app data between sessions (faster, keeps onboarding done)
+appium:autoGrantPermissions: true
+appium:newCommandTimeout: 120
+appium:language: id
+appium:locale: ID

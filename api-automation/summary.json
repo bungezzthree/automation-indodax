@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-11-23T04:54:34+00:00",
+  "finished_utc": "2026-11-23T04:54:35+00:00",
+  "totals": {
+    "total": 0,
+    "SKIP": 0
+  },
+  "pass_rate_pct": null,
+  "p1_failures": 0,
+  "by_feature": {},
+  "slowest_tests": [],
+  "failures": []
+}

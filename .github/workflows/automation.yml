@@ -1,0 +1,69 @@
+# Reference pipeline showing the execution strategy (smoke on PR, regression nightly).
+name: automation
+
+on:
+  pull_request:
+  schedule:
+    - cron: "0 19 * * *"        # 02:00 WIB nightly regression
+  workflow_dispatch:
+    inputs:
+      env: {description: "dev | staging | prod", default: "prod"}
+      scope: {description: "smoke | regression | all", default: "regression"}
+      include: {description: "optional tag to include (e.g. orderbook)", default: ""}
+
+env:
+  TEST_ENV: ${{ github.event.inputs.env || 'prod' }}
+  SCOPE: ${{ github.event_name == 'pull_request' && 'smoke' || github.event.inputs.scope || 'regression' }}
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: api-automation}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - name: Run API ${{ env.SCOPE }}
+        env:
+          INDODAX_API_KEY: ${{ secrets.INDODAX_API_KEY }}
+          INDODAX_API_SECRET: ${{ secrets.INDODAX_API_SECRET }}
+        run: >
+          python run.py --env "$TEST_ENV" --scope "$SCOPE"
+          ${{ github.event.inputs.include && format('--include {0}', github.event.inputs.include) || '' }}
+          ${{ github.event_name == 'schedule' && '--rerun-failed' || '' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: api-results, path: api-automation/results/latest}
+
+  web:
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: ui-automation}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - uses: actions/setup-node@v4
+        with: {node-version: "20"}
+      - run: pip install -r requirements.txt && rfbrowser init chromium
+      - run: python run.py --platform web --env "$TEST_ENV" --scope "$SCOPE" --processes 2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: web-results, path: ui-automation/results}
+
+  load:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: load-testing}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: locust
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: load-results, path: load-testing/results}
+
+  # android / ios jobs run on a device farm (BrowserStack / self-hosted Mac + emulator):
+  #   python run.py --platform android --env $TEST_ENV --scope $SCOPE

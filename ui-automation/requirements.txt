@@ -1,0 +1,6 @@
+robotframework>=7.1
+robotframework-browser>=19
+robotframework-appiumlibrary>=2.1
+robotframework-datadriver>=1.11
+robotframework-pabot>=4.0
+PyYAML>=6.0.2

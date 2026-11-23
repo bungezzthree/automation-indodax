@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+results/
+!load-testing/results/.gitkeep
+browser/
+playwright-log.txt
+.env
+.idea/
