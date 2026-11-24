@@ -41,13 +41,19 @@ Order Book Should Show Both Sides
     Should Be True    ${bids} >= ${min_levels}    Only ${bids} buy levels shown (min ${min_levels})
 
 Order Book Should Not Be Crossed
-    ${ask}=    Get Best Ask Price
-    ${bid}=    Get Best Bid Price
+    [Documentation]    Best bid and best ask come from the SAME snapshot; reading them at two
+    ...                different instants on a live book could flag a false cross.
+    ${book}=    Get Order Book Snapshot
+    Should Not Be Empty    ${book}[sell]    Sell side empty
+    Should Not Be Empty    ${book}[buy]    Buy side empty
+    ${ask}=    Set Variable    ${book}[sell][0]
+    ${bid}=    Set Variable    ${book}[buy][0]
     Should Be True    ${bid} < ${ask}    Crossed book on UI: best bid ${bid} >= best ask ${ask}
 
 Order Book Sides Should Be Sorted
-    ${asks}=    Get Order Book Prices    sell
-    ${bids}=    Get Order Book Prices    buy
+    ${book}=    Get Order Book Snapshot
+    ${asks}=    Set Variable    ${book}[sell]
+    ${bids}=    Set Variable    ${book}[buy]
     ${sorted_asks}=    Evaluate    sorted($asks)
     ${sorted_bids}=    Evaluate    sorted($bids, reverse=True)
     Lists Should Be Equal    ${asks}    ${sorted_asks}    Sell side is not ascending
