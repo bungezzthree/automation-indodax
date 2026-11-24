@@ -16,7 +16,20 @@ Open Market Page
     New Page    ${WEB_BASE_URL}/market/${pair_slug}
     Fail If Blocked By Edge Protection
     Wait For Elements State    ${MARKET_HEADER}    visible
+    Dismiss Preference Modal If Shown
     Dismiss Onboarding Tour If Shown
+
+Dismiss Preference Modal If Shown
+    [Documentation]    SAFETY NET only. Normally never fires: contexts start with isLiteMode preseeded
+    ...                (see web_common.resource > Build Preseeded User State). If the site changes the
+    ...                mechanism, accept the default classic layout once; the page reloads on save.
+    ${display}=    Get Style    ${PREFERENCE_MODAL}    display
+    IF    '${display}' != 'none'
+        Log    Preference modal appeared despite preseeded state - dismissing    level=WARN
+        Click    ${PREFERENCE_MODAL_SAVE}
+        Wait For Elements State    ${PREFERENCE_MODAL}    hidden
+        Wait For Elements State    ${MARKET_HEADER}    visible
+    END
 
 Fail If Blocked By Edge Protection
     [Documentation]    Distinguish "environment blocked the runner" (Cloudflare/WAF page) from a

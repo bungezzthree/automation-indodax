@@ -18,6 +18,10 @@ LAST_PRICE = "css=h4.last_price_val"
 VOLUME = "css=.vol_val"
 PRICE_ALARM_BUTTON = "css=#btn_price_alarm"
 
+# ----------------------------------------------- "Personalisasi Tampilan" modal
+PREFERENCE_MODAL = "css=#modal-user-preference"
+PREFERENCE_MODAL_SAVE = "css=#modal-user-preference >> text=Simpan Tampilan"
+
 # ------------------------------------------------------------ onboarding tour
 GUIDE_POPUP = "css=#guide-popup"
 GUIDE_NEXT_BUTTON = "css=#p-btn-next"

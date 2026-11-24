@@ -20,8 +20,19 @@ Open Web Session
 Start Clean Context
     [Documentation]    Test Setup: isolated context so tests never share state.
     ${trace}=    Set Variable If    ${TRACING}    ${OUTPUT_DIR}/traces/${TEST_NAME}.zip    ${False}
+    ${state}=    Build Preseeded User State
     New Context    viewport={'width': ${VIEWPORT_WIDTH}, 'height': ${VIEWPORT_HEIGHT}}
-    ...    locale=${LOCALE}    tracing=${trace}
+    ...    locale=${LOCALE}    tracing=${trace}    storageState=${state}
+
+Build Preseeded User State
+    [Documentation]    Known user state applied to EVERY context, so tests never meet one-time UI.
+    ...                `isLiteMode=true` = user already chose the classic ("Trade Klasik") layout, which
+    ...                suppresses the "Personalisasi Tampilan Trade" modal (it shows only when the key
+    ...                is unset on a >=1024px viewport) and keeps /market/<PAIR> on the classic layout
+    ...                our locators target. The site reads it from BOTH localStorage and cookie.
+    ${path}=    Build Storage State    ${WEB_BASE_URL}    ${OUTPUT_DIR}/state/user_state.json
+    ...    local_storage=${{ {"isLiteMode": "true"} }}    cookies=${{ {"isLiteMode": "true"} }}
+    RETURN    ${path}
 
 Close Web Session
     Close Browser    ALL
