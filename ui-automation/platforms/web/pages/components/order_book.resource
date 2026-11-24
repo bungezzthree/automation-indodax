@@ -25,13 +25,22 @@ Get Best Bid Price
     ${price}=    Get Attribute    ${BEST_BID_ROW}    price
     RETURN    ${price}
 
+Get Order Book Snapshot
+    [Documentation]    Atomic read of both sides in ONE browser round trip.
+    ...                The order book is a live feed that re-renders rows every few hundred ms.
+    ...                Looping `Get Elements` + `Get Attribute` per row (51 round trips) races with
+    ...                those updates - a row handle can vanish mid-loop and Playwright waits for it
+    ...                until timeout. A single in-page read always sees one consistent DOM state.
+    ...                Returns a dict: {sell: [prices ascending as displayed], buy: [...]}.
+    ${snapshot}=    Evaluate JavaScript    ${None}
+    ...    () => {
+    ...        const read = (id) => Array.from(document.querySelectorAll('#' + id + ' tbody tr[price]'))
+    ...            .map(r => parseFloat(r.getAttribute('price')));
+    ...        return {sell: read('sell_orders'), buy: read('buy_orders')};
+    ...    }
+    RETURN    ${snapshot}
+
 Get Order Book Prices
     [Arguments]    ${side}
-    ${locator}=    Set Variable If    '${side}' == 'sell'    ${SELL_ORDER_ROWS}    ${BUY_ORDER_ROWS}
-    ${rows}=    Get Elements    ${locator}
-    ${prices}=    Create List
-    FOR    ${row}    IN    @{rows}
-        ${price}=    Get Attribute    ${row}    price
-        Append To List    ${prices}    ${{ float($price) }}
-    END
-    RETURN    ${prices}
+    ${snapshot}=    Get Order Book Snapshot
+    RETURN    ${snapshot}[${side}]
