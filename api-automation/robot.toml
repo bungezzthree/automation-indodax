@@ -1,0 +1,9 @@
+#:schema https://raw.githubusercontent.com/robotcodedev/robotcode/main/etc/robot.json
+# IDE-only settings for the RobotCode plugin (PyCharm/VS Code). Test runs still go through run.py.
+
+python-path = ["."]
+
+[env]
+# First-time library import can exceed the default 10 s on Windows (antivirus scan, cold .pyc cache).
+ROBOTCODE_LOAD_LIBRARY_TIMEOUT = "60"
+PYTHONIOENCODING = "utf-8"

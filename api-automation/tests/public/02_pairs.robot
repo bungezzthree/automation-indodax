@@ -7,6 +7,11 @@ Suite Setup         Load Pair Catalogue
 Test Tags           pairs    public
 
 
+*** Variables ***
+# Placeholder so static analysis (IDE) knows the name; the real catalogue is loaded in Suite Setup.
+${PAIRS}            ${None}
+
+
 *** Test Cases ***
 Pair Catalogue Matches Contract
     [Tags]    smoke    regression    contract    P1

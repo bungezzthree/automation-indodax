@@ -11,6 +11,10 @@ Three independent projects, one shared architecture:
 Each project has its own `requirements.txt`, runner and README so it can live in its own
 repository/pipeline; they share the same conventions so engineers can move between them.
 
+> **Full design document with diagrams** (high-level architecture, sequence, CI/CD with
+> VM execution for Web/API and a local device farm for mobile): [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+> The sections below are a summary.
+
 ---
 
 ## 1. Clean architecture
@@ -151,7 +155,8 @@ robot --include "smokeANDP1" ...                                 # boolean tag e
 
 ```
 .
-├── README.md                      <- this document (architecture & strategy)
+├── README.md                      <- this document (summary)
+├── docs/ARCHITECTURE.md           <- full architecture design + diagrams
 ├── .github/workflows/automation.yml
 ├── api-automation/
 ├── ui-automation/

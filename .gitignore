@@ -7,3 +7,5 @@ browser/
 playwright-log.txt
 .env
 .idea/
+# personal presentation notes - never committed
+docs/private/
