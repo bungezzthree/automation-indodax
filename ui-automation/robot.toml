@@ -1,0 +1,9 @@
+#:schema https://raw.githubusercontent.com/robotcodedev/robotcode/main/etc/robot.json
+# IDE-only settings for the RobotCode plugin (PyCharm/VS Code). Test runs still go through run.py.
+
+python-path = ["."]
+
+[env]
+# Browser / AppiumLibrary are heavy to import; default 10 s is too short on first load.
+ROBOTCODE_LOAD_LIBRARY_TIMEOUT = "90"
+PYTHONIOENCODING = "utf-8"
