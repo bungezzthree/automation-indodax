@@ -17,7 +17,7 @@ repository/pipeline; they share the same conventions so engineers can move betwe
 
 ---
 
-## 1. Clean architecture
+## 1. Architecture
 
 Every project follows the same dependency direction — outer layers know inner layers, never the reverse:
 
